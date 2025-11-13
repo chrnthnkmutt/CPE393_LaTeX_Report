@@ -1,0 +1,1259 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+  \usepackage{luacolor}
+  \usepackage[soul]{lua-ul}
+\else
+  \usepackage{soul}
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage[a4paper,margin=20mm]{geometry}
+\usepackage{enumitem}
+\usepackage{bookmark}
+\usepackage{hyperref}
+\usepackage[style=numeric,sorting=none]{biblatex}
+\addbibresource{reference.bib}
+\usepackage{pgfgantt}
+\usepackage{pdflscape}
+\usepackage{afterpage}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+
+\date{}
+
+\begin{document}
+
+\begin{center}
+\includegraphics[width=1.75523in,height=1.76398in]{logo_image.jpg}
+
+{\fontsize{18pt}{24pt}\selectfont\textbf{Computer Engineering Senior Project Progress Report}\par}
+{\fontsize{18pt}{24pt}\selectfont\textbf{B. Eng. Computer Engineering}\par}
+{\fontsize{15pt}{22pt}\selectfont\textbf{Academic Year 2025}\par}
+\vspace{1em}
+\vspace{1em}
+
+{\fontsize{14pt}{16pt}\selectfont\textbf{Project Title}\par}
+\vspace{1em}
+{\fontsize{12pt}{14pt}\selectfont{AgentiX: Agentic Workflow Orchestration for\\
+Generic Document Processing and Approval}\par}
+\vspace{1em}
+
+{\fontsize{14pt}{16pt}\selectfont\textbf{Group Members}\par}
+\vspace{1em}
+{\fontsize{12pt}{14pt}\selectfont{Charunthon Limseelo 65070503410 (\href{mailto:charunthon.lims@kmutt.ac.th}{charunthon.lims@kmutt.ac.th})}\par}
+\vspace{0.5em}
+{\fontsize{12pt}{14pt}\selectfont{Pakawat Phasook 65070503430 (\href{mailto:pakawat.phas@kmutt.ac.th}{pakawat.phas@kmutt.ac.th})}\par}
+\vspace{1em}
+\vspace{1em}
+{\fontsize{14pt}{16pt}\selectfont\textbf{Advisor}\par}
+\vspace{2em}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+(Asst. Prof. Dr. Santitham Prom-on)\\
+\vspace{2em}
+By Date \_\_\_\_\_\_\_\_/\_\_\_\_\_\_\_\_/\_\_\_\_\_\_\_\_
+
+\emph{By signing this, I hereby acknowledge that I have read the
+proposal and approve this project}\\
+\vspace{5em}
+This project is a part of the assignment in the CPE401: Computer
+Engineering Project Course, Semester 1/2025, Computer Engineering
+Department (CPE)
+
+Faculty of Engineering, King Mongkut's University of Technology Thonburi
+\end{center}
+
+\newpage
+
+{\fontsize{20pt}{24pt}\selectfont\textbf{Preface}\par}
+\vspace{1em}
+
+This progress report represents the culmination of the first semester's work on the AgentiX project, undertaken as part of the CPE401: Computer Engineering Project course at King Mongkut's University of Technology Thonburi. The report documents our journey from initial concept to the current state of development for an intelligent document approval platform designed to transform organizational workflows.
+
+\vspace{1em}
+
+The AgentiX project emerged from a recognition that modern organizations continue to struggle with inefficient, manual approval processes despite the availability of digital tools. Our vision is to create a platform that not only digitizes these workflows but fundamentally reimagines them through the integration of Agentic AI, secure cryptographic signatures, and intelligent document understanding.
+
+\vspace{1em}
+
+This report serves multiple purposes: it chronicles our progress to date, demonstrates the depth of our research and analysis, and establishes a clear roadmap for the implementation phase ahead. We have structured the document to guide the reader from foundational concepts through our proposed solution, providing comprehensive context at each stage.
+
+\vspace{1em}
+
+Throughout this semester, we have focused on establishing a solid theoretical and practical foundation. This has included extensive stakeholder analysis, requirements gathering, literature review, competitive analysis, and the design of core system architectures. The work presented here reflects countless hours of research, discussion, iteration, and collaboration with our advisor.
+
+\vspace{1em}
+
+We wish to express our sincere gratitude to Asst. Prof. Dr. Santitham Prom-on for his invaluable guidance, expertise, and patience throughout this project. His insights have been instrumental in shaping our approach and ensuring academic rigor. We also acknowledge the Computer Engineering Department for providing the resources and environment conducive to pursuing this ambitious undertaking.
+
+\vspace{1em}
+
+As we move into the second semester, our focus will shift from design and planning to implementation and validation. We remain committed to delivering a platform that not only meets academic standards but also addresses real-world organizational needs with practical, scalable solutions.
+
+\vspace{1em}
+
+This report represents not just our academic progress, but our commitment to leveraging technology to solve meaningful problems in the digital transformation of organizational processes.
+
+\vspace{3em}
+
+\begin{flushright}
+Charunthon Limseelo and Pakawat Phasook\\
+November 2025\\
+King Mongkut's University of Technology Thonburi
+\end{flushright}
+
+\newpage
+{\fontsize{20pt}{24pt}\selectfont\textbf{Section 1}\par}
+{\fontsize{20pt}{24pt}\selectfont\textbf{Introduction}\par}
+
+\vspace{1em}
+
+\textbf{1.1 Keywords}
+
+\emph{Project \& Core Concept}
+
+\begin{itemize}
+\item
+  AgentiX, Online Agreement Approval, Digital Signature, Document
+  Approval Platform, Automated Approval System
+\end{itemize}
+
+\emph{Technology \& Features}
+
+\begin{itemize}
+\item
+  Agentic AI, AI Workflow Automation, Intelligent Document Routing,
+  Configurable Workflow, Natural Language Processing (NLP),
+  Bit-Matching, End-to-End Document Lifecycle Management
+\end{itemize}
+
+\emph{Problem \& Solution}
+
+\begin{itemize}
+\item
+  Organizational Efficiency, Enhanced Security, Digital Transformation,
+  Centralized Approval Service, Streamlined Business Process
+\end{itemize}
+
+\vspace{1em}
+
+\textbf{1.2 Abstract}
+
+This project proposes \textbf{AgentiX}, a centralized and intelligent
+platform designed to revolutionize the online agreement approval process
+within large organizations. The primary objective is to significantly
+reduce the time and effort required for document approval by C-level
+executives and department heads. AgentiX achieves this through a novel
+\textbf{Agentic AI workflow} that automates the entire document
+lifecycle, from submission to final signature.
+
+The system\textquotesingle s core methodology involves a multi-faceted
+approach. First, it uses \textbf{Natural Language Processing (NLP)} to
+intelligently analyze and classify documents, dynamically configuring a
+specific approval flow based on document content and sender roles.
+Second, it implements a highly secure \textbf{Digital Signature Module}
+that utilizes \textbf{bit-matching technology} to ensure the integrity
+and authenticity of every signed agreement. Furthermore, an
+\textbf{Intelligent Return Loop} feature prevents unnecessary delays by
+routing rejected documents back only to the responsible party for
+correction, rather than to the original sender. By centralizing the
+approval process and integrating these advanced AI capabilities, AgentiX
+is expected to enhance document security, drastically cut down on
+approval times, and ultimately drive greater operational efficiency for
+complex organizational workflows.
+
+\vspace{1em}
+
+\textbf{1.3 Project Introduction}
+
+In large-scale organizations, the process of gaining approval for
+agreements, contracts, and internal documents is often a significant
+bottleneck. Characterized by manual routing, fragmented workflows, and a
+lack of standardized security measures, this time-consuming process can
+hinder operational efficiency and expose organizations to unnecessary
+risks. The complex chains of command, which require approval from
+C-level executives and various department heads, are particularly
+susceptible to delays and human error.
+
+This project introduces \textbf{AgentiX}, a cutting-edge platform
+designed to transform and optimize the online agreement approval
+workflow. AgentiX is a centralized, secure, and intelligent system that
+leverages the power of \textbf{Agentic AI} to automate the entire
+document lifecycle. The platform's core innovation lies in its ability
+to understand document content and context, intelligently routing it to
+the right person for approval without manual intervention.
+
+By implementing a secure digital signature module that validates
+document integrity, configurable AI-driven workflows, and a centralized
+hub for all approval activities, AgentiX aims to provide a robust
+solution to a pervasive problem. The successful implementation of this
+project will not only dramatically reduce approval times but will also
+significantly enhance the security, transparency, and overall efficiency
+of organizational operations.
+
+\newpage
+
+\textbf{1.4 Project Statement}
+
+Manual and fragmented document approval processes within large
+organizations are a significant source of operational inefficiency,
+leading to costly delays and security vulnerabilities. The reliance on
+hierarchical, paper-based, or non-integrated digital workflows results
+in lost productivity, a lack of transparency, and an increased risk of
+human error. This problem is particularly acute in complex environments
+where documents must pass through a lengthy chain of command, involving
+multiple departments and senior-level stakeholders.
+
+The \textbf{AgentiX} project aims to address this critical issue by
+developing a centralized, intelligent, and secure platform for automated
+agreement approval. The project\textquotesingle s core objective is to
+replace inefficient, traditional approval methods with a dynamic Agentic
+AI workflow that intelligently routes and manages documents from
+submission to final signature. By providing a secure, auditable, and
+highly efficient system, AgentiX will empower organizations to
+drastically reduce approval times, enhance document security, and
+achieve greater overall operational agility.
+
+\vspace{1em}
+
+\textbf{1.5 Objectives}
+
+\begin{itemize}
+\item
+  \textbf{To Create the AgentiX Platform}: This objective focuses on
+  building the foundational components of the system. This includes
+  developing a centralized, standardized platform that can manage the
+  entire document approval lifecycle. It also involves designing the
+  secure digital signature module and architecting the Agentic AI
+  workflow engine that will automate document routing.
+\item
+  \textbf{To Develop and Integrate Key Features of the Platform}: This
+  objective is about the practical development and integration of the
+  core functionalities. This means coding the centralized approval
+  service to handle diverse documents, building the digital signature
+  feature with its bit-matching and validation processes, and fully
+  implementing the Agentic AI to intelligently assign documents. A key
+  part of this is also coding the privacy and security controls to
+  protect all sensitive data.
+\item
+  \textbf{To Test, Deploy, and Operate the Platform}: This final
+  objective ensures the platform is ready for use and performs as
+  intended. This involves rigorous testing and evaluation to verify the
+  performance, security, and accuracy of the system. It also includes
+  validating the AI\textquotesingle s ability to correctly route
+  documents and confirming the digital signature
+  module\textquotesingle s legality. The final step is to deploy the
+  platform and provide ongoing support to ensure smooth and reliable
+  operation.
+\end{itemize}
+
+\vspace{1em}
+
+\textbf{1.6 Scopes}
+
+\begin{itemize}
+\item
+  \textbf{Centralized Approval Service}: Develop a standardized,
+  centralized platform that can manage and approve a wide range of
+  documents across various sectors within an organization. This service
+  will act as the single source of truth for all approval decentralized
+  workflows.
+\item
+  \textbf{Fully-Automated Agentic AI Workflow Integration}: Implement an
+  agentic AI workflow engine that intelligently analyzes document
+  content, understands the nature of the agreement, and automatically
+  assigns documents to the correct stakeholders (e.g., C-level
+  executives, department heads) for approval.
+\item
+  \textbf{Secure Digital Signature Module}: Create a secure module that
+  generates and validates encrypted digital signatures. This module will
+  perform bit-matching operations to verify the signature against the
+  document\textquotesingle s content, ensuring the integrity and
+  authenticity of the agreement. It will also validate the
+  signer\textquotesingle s credentials and licenses to ensure legality.
+\item
+  \textbf{End-to-End Document Lifecycle Management}: The platform will
+  support the entire lifecycle of a document, from initial submission
+  and routing to approval, secure digital signing, and final archiving.
+  This includes features for tracking document status and audit trails.
+\item
+  \textbf{Privacy and Security Controls}: The system will incorporate
+  robust privacy and security measures to protect sensitive document
+  information and approval data. This includes access controls and data
+  encryption to ensure confidentiality and compliance.
+\end{itemize}
+
+\newpage
+
+\textbf{1.7 Project Type}
+
+This senior project aims to provide a comprehensive solution to a
+specific problem, making it \textbf{a solution-type senior project}. It
+will involve identifying the core issues, developing a robust and
+practical solution, and demonstrating its effectiveness through rigorous
+testing and evaluation. The ultimate goal is to create a tangible and
+impactful outcome that addresses the identified need.
+
+\vspace{1em}
+
+\textbf{1.8 Proposed Method}
+
+This study employs a multi-phase, requirements-driven methodology to
+validate AgentiX as an agentic approval automation platform. The method
+integrates stakeholder analysis, document-intelligence engineering,
+security-by-design practices, and rigorous evaluation to ensure the web
+application, Agentic AI services, and digital signature pipeline operate
+cohesively across both enterprise-private and cloud-deployed offerings.
+
+\subsubsection{\texorpdfstring{\emph{Phase 1: Stakeholder Requirement Elicitation and Compliance Analysis}}{Phase 1: Stakeholder Requirement Elicitation and Compliance Analysis}}
+
+\begin{itemize}
+\item Conduct structured interviews with C-level approvers, process
+owners, and enterprise security officers to capture current approval
+paths, escalation logic, and pain points in turnaround time and
+traceability.
+\item Translate regulatory and organizational constraints (e.g., PDPA,
+ISO/IEC 27001 controls, internal audit mandates) into a traceable
+requirement catalogue that informs prompt engineering, access-control
+rules, and audit log design.
+\item Document integration requirements for both service models. The
+enterprise-private track enumerates connectors to core databases,
+document repositories, and identity providers; the managed cloud track
+defines multi-tenant boundaries, admin role provisioning, and service
+level objectives.
+\end{itemize}
+
+\subsubsection{\texorpdfstring{\emph{Phase 2: Data Acquisition and Document Understanding Pipeline}}{Phase 2: Data Acquisition and Document Understanding Pipeline}}
+
+\begin{itemize}
+\item Curate a representative corpus of approval artefacts (contracts,
+financial forms, HR requests) and annotate them with semantic metadata
+(e.g., business unit, risk tier, mandatory signatories) to establish the
+ground-truth taxonomy used by the Agentic AI.
+\item Design the ingestion pipeline for the web application by
+normalising file formats, extracting text via OCR when required, and
+persisting canonical document objects enriched with submitter identity
+and submission context.
+\item Fine-tune or prompt-engineer the large language model (LLM)
+component with retrieval-augmented context so it can classify documents,
+identify obligations, and infer the most appropriate approver roles
+before the workflow engine issues assignments.
+\end{itemize}
+
+\subsubsection{\texorpdfstring{\emph{Phase 3: Agentic Workflow Orchestration Design}}{Phase 3: Agentic Workflow Orchestration Design}}
+
+\begin{itemize}
+\item Architect a multi-agent workflow where an orchestration agent
+delegates tasks to specialised sub-agents: a document analysis agent that
+interprets clauses, a policy compliance agent that validates routing
+against organisational rules, and a security agent that enforces
+signatory eligibility.
+\item Implement a stateful workflow engine that records each approval
+transition, supports conditional branching (e.g., finance review before
+legal), and exposes REST/GraphQL APIs for enterprise system integration
+or the cloud dashboard.
+\item Enable administrator interfaces for role assignment. In the
+cloud scenario, enterprise tenants self-manage approvers through the web
+UI; in the private deployment, roles are synchronised with the
+organisation's identity and access management (IAM) service via SCIM or
+LDAP adapters.
+\end{itemize}
+
+\subsubsection{\texorpdfstring{\emph{Phase 4: Digital Signature and Bit-Matching Validation Subsystem}}{Phase 4: Digital Signature and Bit-Matching Validation Subsystem}}
+
+\begin{itemize}
+\item Engineer the digital signature service using hardware-backed key
+storage (HSM or cloud KMS) and standards-compliant signing algorithms
+(e.g., RSA-PSS or ECDSA). Each signature operation binds approver
+identity, timestamp, and document hash.
+\item Implement the bit-matching validator that recomputes cryptographic
+hashes after each signature, compares them to the stored baseline, and
+halts routing if any bit-level discrepancy is detected, thereby
+safeguarding against tampering before documents progress to the next
+approver.
+\item Integrate visual signature rendering by overlaying legal names
+and stylised signatures onto the PDF artefact while maintaining the
+integrity of the cryptographic envelope.
+\end{itemize}
+
+\subsubsection{\texorpdfstring{\emph{Phase 5: Platform Implementation and Deployment Blueprint}}{Phase 5: Platform Implementation and Deployment Blueprint}}
+
+\begin{itemize}
+\item Develop the web application using a modular front-end (for
+submission, approval queues, and audit dashboards) backed by
+microservices that manage authentication, workflow execution, document
+storage, and notification delivery.
+\item For enterprise-private deployments, containerise the services and
+provide infrastructure-as-code templates that plug into the client's
+private network, enabling direct database integration, VPN-enforced
+connectivity, and custom logging sinks.
+\item For the cloud-managed service, design a multi-tenant architecture
+with tenant isolation at the database schema or cluster level, automated
+provisioning pipelines, and monitoring that enforces availability and
+throughput commitments.
+\end{itemize}
+
+\subsubsection{\texorpdfstring{\emph{Phase 6: Verification, Validation, and Evaluation}}{Phase 6: Verification, Validation, and Evaluation}}
+
+\begin{itemize}
+\item Define quantitative KPIs covering classification accuracy,
+end-to-end approval latency, signature validation success rate, and
+system uptime across both deployment models.
+\item Execute functional testing (unit, integration, and user
+acceptance), adversarial simulations that attempt to alter signed
+documents, and load testing to measure performance under concurrent
+submission spikes.
+\item Conduct iterative stakeholder reviews, feeding user feedback into
+a backlog for refinement, and produce an evidence-based assessment on
+the readiness of AgentiX for production rollout in regulated enterprise
+environments.
+\end{itemize}
+
+The phased approach ensures that AgentiX is grounded in real
+organisational requirements, leverages Agentic AI to determine
+appropriate signatories, and enforces digital-signature integrity before
+advancing documents through the approval chain, thereby delivering a
+rigorous validation of the proposed solution.
+
+\vspace{1em}
+
+\textbf{1.9 Related Topics / Original Engineering Content}
+
+\emph{1. AI \& Machine Learning Engineering}
+
+This is the central discipline for the project. It involves the
+development, training, and deployment of the intelligent components.
+
+\begin{itemize}
+\item
+  Natural Language Processing (NLP): Engineering to build models that
+  can read, understand, and classify documents.
+\item
+  Machine Learning (ML) Ops: The practice of managing the lifecycle of
+  the AI models, from training to deployment and monitoring.
+\item
+  Agentic AI Systems: The design and implementation of intelligent
+  agents that can reason and act autonomously to orchestrate workflows.
+\end{itemize}
+
+\emph{2. Software Engineering}
+
+This is the overarching discipline that encompasses the entire
+system\textquotesingle s design and development.
+
+\begin{itemize}
+\item
+  Backend Development: Building the core services, APIs, and business
+  logic that power the platform.
+\item
+  Frontend Development: Creating the user-facing web interface and
+  dashboards for document management and approval.
+\item
+  System Architecture: Designing the overall structure of the platform,
+  including the interaction between its different layers (presentation,
+  application, data).
+\end{itemize}
+
+\emph{3. Cybersecurity \& Cryptography Engineering}
+
+This is crucial for the platform\textquotesingle s security and trust
+features.
+
+\begin{itemize}
+\item
+  Cryptography: Engineering the secure digital signature module,
+  including the bit-matching algorithm and data encryption.
+\item
+  Access Control: Implementing robust user authentication and
+  authorization systems to ensure data confidentiality.
+\item
+  Security Auditing: Designing and building the system\textquotesingle s
+  audit trail to ensure non-repudiation and compliance.
+\end{itemize}
+
+\emph{4. Data Engineering}
+
+This field is responsible for managing the flow and storage of data
+throughout the platform.
+
+\begin{itemize}
+\item
+  Database Management: Designing and maintaining the centralized
+  database for storing user data, document metadata, and logs.
+\item
+  Data Pipelines: Creating automated systems for ingesting, processing,
+  and storing documents in the repository.
+\end{itemize}
+
+\emph{5. DevOps \& Cloud Engineering}
+
+This ensures the platform is scalable, reliable, and easily deployable.
+
+\begin{itemize}
+\item
+  Infrastructure as Code (IaC): Automating the setup of the cloud
+  environment to ensure consistency and speed.
+\item
+  Continuous Integration/Continuous Deployment (CI/CD): Building
+  automated pipelines for testing, building, and deploying the
+  application code.
+\item
+  Scalability \& Performance: Engineering the system to handle a large
+  volume of users and documents without performance degradation.
+\end{itemize}
+
+\vspace{1em}
+
+\textbf{1.10 Task Breakdown and Draft Schedule}
+
+\textbf{Work Packages}
+
+\emph{WP1 Initiation and Compliance Scoping (25/09/2025--15/10/2025)}
+
+\begin{itemize}
+\item Capture end-to-end approval lifecycles, role hierarchies, and security constraints with executive sponsors, process owners, and compliance teams.
+\item Formalise regulatory, legal, and internal control requirements into a traceable specification governing document handling and signature policy.
+\item Prioritise integration touchpoints for both enterprise-private deployments and the managed cloud service, including identity federation and database access needs.
+\end{itemize}
+
+\emph{WP2 Data Corpus Preparation and Submission Pipeline (16/10/2025--15/11/2025)}
+
+\begin{itemize}
+\item Assemble a stratified corpus of historical approval artefacts, cleanse formatting inconsistencies, and annotate with workflow-relevant metadata.
+\item Implement the web application intake pipeline to normalise uploads, enrich them with submitter and context data, and persist canonical document objects.
+\item Establish secure storage and access controls for training and evaluation datasets aligned with privacy and retention mandates.
+\end{itemize}
+
+\emph{WP3 Agentic Intelligence Configuration (16/11/2025--31/12/2025)}
+
+\begin{itemize}
+\item Configure and fine-tune the LLM-driven Agentic AI to classify document intents, infer mandatory signatories, and surface routing rationales.
+\item Design multi-agent coordination logic covering document understanding, policy validation, and role eligibility checks.
+\item Prototype explainability artefacts so approvers and auditors can trace AI-driven routing decisions.
+\end{itemize}
+
+\emph{WP4 Digital Signature and Bit-Matching Security Layer (01/01/2026--31/01/2026)}
+
+\begin{itemize}
+\item Engineer the cryptographic signature service with hardware-backed key custody and standards-compliant signing algorithms.
+\item Implement bit-level hash verification prior to each routing advance, generating tamper alerts when discrepancies are detected.
+\item Integrate visual signature overlays and notarisation metadata within the document rendering pipeline without compromising cryptographic integrity.
+\end{itemize}
+
+\emph{WP5 Workflow Orchestration and Integration (01/02/2026--15/03/2026)}
+
+\begin{itemize}
+\item Build the stateful workflow engine, API layer, and notification services that coordinate sequential and parallel approvals.
+\item Connect enterprise-private deployments to on-premise databases, HR systems, and identity providers; configure multi-tenant isolation for the cloud service.
+\item Deliver administrative tooling for role assignment, escalation rule configuration, and audit trail exploration.
+\end{itemize}
+
+\emph{WP6 Deployment Enablement and Operationalisation (16/03/2026--10/04/2026)}
+
+\begin{itemize}
+\item Package the platform as containerised services with infrastructure-as-code templates for private network rollout.
+\item Provision the managed cloud environment, implement tenant onboarding automation, and configure observability and incident response playbooks.
+\item Draft runbooks covering routine operations, key rotation, and compliance reporting obligations.
+\end{itemize}
+
+\emph{WP7 Verification, Validation, and Handover (11/04/2026--30/04/2026)}
+
+\begin{itemize}
+\item Execute functional, security, and load testing against key performance indicators: classification accuracy, approval latency, and signature validation fidelity.
+\item Facilitate stakeholder acceptance workshops, capture residual risks, and prioritise enhancement backlogs for post-project development.
+\item Compile the final technical dossier, user documentation, and handover materials for sustained operation.
+\end{itemize}
+
+\subsubsection{\texorpdfstring{\textbf{Submission Timeline}}{Submission Timeline}}
+
+\textbf{Semester 1}
+
+\begin{itemize}
+\item \textbf{15 Aug 2025 -- Senior Project Topic Form:} Form the team and confirm an advisor to oversee the project.
+\item \textbf{29 Aug 2025 -- Project Idea Document:} Finalise title, objectives, and scope with advisor alignment.
+\item \textbf{26 Sep 2025 -- Proposal Report:} Submit an expanded proposal covering motivation, objectives, scope, feasibility, background, and initial design.
+\item \textbf{2--3 Oct 2025 -- Proposal Presentation:} Deliver an on-site presentation summarising the proposal.
+\item \textbf{9 Dec 2025 -- Progress Report:} Extend the proposal into a technical progress update detailing achievements, challenges, and plans.
+\item \textbf{15--16 Dec 2025 -- Progress Presentation:} Present the current project status in an on-site session.
+\end{itemize}
+
+\textbf{Semester 2}
+
+\begin{itemize}
+\item \textbf{Jan 2026 onward:} Semester 2 activities commence with focus on implementation, validation, and deployment deliverables.
+\item \textbf{Mid-May 2026:} Target window for presenting the final version and demonstrating production readiness.
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=\linewidth]{gantt_chart.png}
+\end{center}
+
+\textbf{1.11 Deliverables for Term 1}
+
+\begin{itemize}
+\item\textbf{ Requirements and Compliance Dossier:} Consolidated process maps, stakeholder roles, and regulatory controls captured during WP1.
+\item\textbf{ Annotated Document Corpus:} Curated and labeled dataset with submission pipeline operational documentation from WP2.
+\item\textbf{ Agentic AI Design Pack:} Model configuration records, routing rationale templates, and explainability prototypes generated in WP3.
+\item\textbf{ Platform Architecture Blueprint:} High-level system diagrams covering web application modules, workflow services, and integration endpoints.
+\item\textbf{ Interim Progress Report:} Academic report summarising findings, risks, and mitigation strategies up to 31/12/2025.
+\end{itemize}
+
+\vspace{1em}
+
+\textbf{1.12 Deliverables for Term 2}
+
+\begin{itemize}
+\item\textbf{ Secure Signature Service:} Hardened digital-signature and bit-matching subsystem with validation evidence from WP4.
+\item\textbf{ Integrated Workflow Platform:} Web application, orchestration engine, and administrative tooling released for both deployment models (WP5).
+\item\textbf{ Deployment Operations Kit:} Container images, infrastructure-as-code assets, and operational playbooks prepared during WP6.
+\item\textbf{ Verification and Evaluation Report:} Test results, stakeholder acceptance outcomes, and production readiness assessment from WP7.
+\item\textbf{ Final Presentation Package:} Slide deck, demonstration scripts, and handover documentation delivered by 30/04/2026.
+\end{itemize}
+
+\newpage
+
+{\fontsize{20pt}{24pt}\selectfont\textbf{Section 2}\par}
+{\fontsize{20pt}{24pt}\selectfont\textbf{Background Information}\par}
+
+\subsubsection{\fontsize{15pt}{15pt}{\texorpdfstring{\textbf{Literature Review}}{Literature Review}}\label{literature-review}}
+
+The proposed AgentiX platform sits at the intersection of several
+established and emerging fields of research: intelligent document
+processing, business process automation, and cryptographic security. A
+review of existing literature reveals a strong academic and industrial
+consensus on the challenges of manual workflows and the transformative
+potential of artificial intelligence (AI) in this domain, while also
+highlighting key areas requiring robust solutions. This review will
+cover advancements in these areas, considering both proprietary and
+open-source approaches.
+
+\vspace{1em}
+
+\textbf{1. The Evolution of Business Process Automation (BPA)}
+
+Traditional business process automation (BPA), often relying on Robotic
+Process Automation (RPA), has been effective in handling repetitive,
+rule-based tasks with structured data. However, as noted by research
+from
+\autocite{UiPath2025} and
+\autocite{Atlassian2025}, these systems are rigid and fail when faced with unstructured
+data or unexpected exceptions. This limitation has spurred the
+development of more advanced systems, termed "Agentic AI workflows"
+(UiPath, 2025). These systems are defined by their ability to reason,
+plan, and adapt dynamically without constant human intervention. The
+AgentiX project builds directly on this new paradigm, moving beyond
+simple automation to create a truly intelligent and flexible workflow.
+
+\vspace{1em}
+
+\textbf{2. Intelligent Document Processing (IDP) and Natural Language
+Processing (NLP)}
+
+The core of AgentiX\textquotesingle s intelligent routing relies on
+Intelligent Document Processing (IDP). A wealth of literature, including
+studies from
+\autocite{AWSIDP2025} and
+\autocite{Reveille2025}, confirms that IDP, powered by AI technologies such as Natural
+Language Processing (NLP), Machine Learning (ML), and Optical Character
+Recognition (OCR), is crucial for automating document-heavy processes.
+These studies highlight that NLP can accurately classify documents,
+extract key data from unstructured text (e.g., invoices, contracts), and
+enable intelligent, context-aware routing. The challenge, as documented
+by
+\autocite{StackAI2025}, often lies in the quality and standardization of training
+data. AgentiX addresses this by focusing its Proof of Concept (PoC) on a
+clean, consistent dataset to validate the feasibility of its AI core.
+
+\vspace{1em}
+
+\textbf{3. Digital Signatures and Cryptographic Integrity}
+
+The legal and security aspects of digital signatures are
+well-documented. Research from
+\autocite{LearningGate2025} and a comprehensive guide from
+\autocite{TSCP2019} confirm that digital signatures, which are a specific type of
+electronic signature, use cryptographic methods based on Public Key
+Infrastructure (PKI) and hash functions to guarantee document integrity,
+authenticity, and non-repudiation. Any alteration to a digitally signed
+document invalidates the signature, providing a robust security
+mechanism. AgentiX's use of "bit-matching" is a direct application of
+this established cryptographic principle to ensure the immutability of
+signed documents. Case studies from
+\autocite{Gate2025} further demonstrate the successful implementation of secure
+digital signing solutions to streamline paperless workflows.
+
+\vspace{1em}
+
+\textbf{4. Open-Source Tools and Frameworks}
+
+The development of AI-powered solutions can be pursued with both
+proprietary and open-source toolkits. A growing body of research
+supports the viability of open-source frameworks for key project
+components. For \textbf{NLP and document processing}, frameworks like
+\textbf{Hugging Face\textquotesingle s Transformers} and libraries such
+as \textbf{spaCy} offer powerful, pre-trained models for tasks like text
+classification and named entity recognition. These tools can be
+fine-tuned on a custom dataset, providing a robust, flexible alternative
+to proprietary API services. For \textbf{workflow orchestration},
+open-source libraries like \textbf{LangChain} and \textbf{AutoGen}
+provide the foundational architecture for building multi-agent systems
+that can reason and perform multi-step tasks. In the realm of
+\textbf{cryptography and digital signatures}, open-source libraries like
+\textbf{OpenSSL} and \textbf{PyCryptodome} provide the necessary tools
+for implementing secure hashing functions and managing public-key
+infrastructure. The use of these open-source tools allows for greater
+customization, transparency, and a reduction in long-term licensing
+costs, though it may require a higher initial investment in development
+expertise.
+
+\newpage
+
+\textbf{5. Challenges in Implementation and User Adoption}
+
+While the technical capabilities are promising, academic and industry
+literature consistently points to several challenges in implementing
+automation in large organizations. These include employee resistance to
+change, integration with legacy systems, and the need for clear
+governance
+\autocite{MotivityLabs2025}). A successful implementation requires a clear alignment
+between business goals and the technological solution, as well as a
+strong focus on change management. The AgentiX project addresses these
+known challenges by proposing a PoC that includes stakeholder feedback
+from the very beginning, ensuring the solution is not only technically
+sound but also aligned with user needs and organizational realities.
+
+\vspace{1em}
+
+\textbf{Conclusion}
+
+The literature provides a clear foundation for the AgentiX project,
+validating the need for an intelligent, secure, and flexible document
+approval platform. While the technical components are supported by
+existing research, the project\textquotesingle s unique value
+proposition lies in the seamless integration of an \textbf{Agentic AI}
+to create a truly adaptive workflow that solves a critical business
+problem. By combining established cryptographic security with
+cutting-edge AI, leveraging both proprietary and open-source tools,
+AgentiX is poised to deliver a solution that moves beyond traditional
+automation to a new era of intelligent process management.
+
+\vspace{1em}
+
+\subsubsection{\fontsize{15pt}{15pt}{\texorpdfstring{\textbf{Existing Solutions \& Competitor Analysis}}{Existing Solutions & Competitor Analysis}}\label{existing-solutionsproducts}}
+
+The document-approval landscape is crowded with mature offerings. Enterprise e-signature leaders, collaboration suites, automation platforms, and open-source frameworks each solve portions of the approval problem. Interviews with prospective stakeholders and a literature scan reveal that none of these players blend contextual document understanding, adaptive routing, and tamper-evident signing inside a single governed platform. The following review revisits representative categories in depth before contrasting their strengths with the gaps AgentiX is engineered to close.
+
+\vspace{1em}
+
+\textbf{Enterprise-Grade Digital Signature Platforms (Adobe Acrobat Sign, DocuSign)}\\
+These services dominate regulated industries because they ship hardened e-signature infrastructure, global legal compliance (eIDAS, ESIGN), identity verification, and granular audit trails\autocite{Oneflow2024,iLovePDF2024}. Their drag-and-drop authoring tools and integration packs (Salesforce, Microsoft 365, Google Workspace) make onboarding simple for business users. However, their routing logic is static: approvals flow along predefined chains configured by administrators. The systems cannot read a contract clause to dynamically identify the right legal reviewer, leaving content-aware orchestration outside the core product.
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=0.5\linewidth]{DocuSign740.png}
+     \caption{DocuSign}
+     \label{fig:docusign}
+ \end{figure}
+
+\vspace{1em}
+
+\textbf{Collaboration Suites (Lark, Google Workspace)}\\
+Collaboration hubs streamline discussions, shared editing, and lightweight approval checklists, allowing teams to launch form-driven approvals directly inside chat and document tools\autocite{Lark2025,GoogleDocsApproval2024}. They work well for rapid feedback loops, but automation is limited to scripts or add-ons, and signature capabilities rely on third parties. Governance teams cite difficulties enforcing complex approval hierarchies or cryptographic controls across distributed tenants.
+
+\begin{figure}
+     \centering
+     \includegraphics[width=0.5\linewidth]{lark_approval.png}
+     \caption{Lark Approval}
+     \label{fig:lark-approval}
+\end{figure}
+
+\newpage
+
+\textbf{Automation Suites (Microsoft Power Automate)}\\
+Power Automate offers a vast connector library and a low-code builder for trigger-based flows, accelerating integration projects inside Microsoft-centric organisations\autocite{MicrosoftPowerAutomate2024}. Nevertheless, every routing rule remains human-authored; AI assistance is optional, and signature operations usually call external services. Maintaining consistent governance across multiple environments becomes burdensome in enterprise deployments.
+
+\begin{figure}
+     \centering
+     \includegraphics[width=0.5\linewidth]{flow-content-approval-full.png}
+     \caption{Document Approval Workflow Example from Power Automate}
+     \label{fig:powerautomate-workflow}
+\end{figure}
+
+\vspace{1em}
+
+\textbf{Integration-First BPM Tools (n8n)}\\
+Modern BPM tools like n8n empower technical teams to compose deeply customised automations with branching logic, multi-level approvals, and AI-powered nodes\autocite{n8nFeatures2024}. They shine when organisations need to stitch together bespoke workflows across hundreds of systems, and sample blueprints demonstrate sophisticated document approvals\autocite{n8n4452}. Yet n8n ships without native signing, so compliance assurances must be bolted on. Document comprehension requires custom prompt engineering, and the security posture varies by hosting model, presenting a steep learning curve for non-technical stakeholders.
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=0.5\linewidth]{approval_workflow-1024x297.png}
+     \caption{Simple Flow of Document Approval on n8n}
+     \label{fig:n8n-workflow}
+ \end{figure}
+
+\textbf{Open-Source Engineering Stacks}\\
+Open-source stacks attract engineering-led organisations that demand maximum control and zero licensing fees. By mixing NLP models, workflow engines, and cryptography libraries, teams can theoretically recreate any capability. The trade-off is significant engineering effort: user interfaces, monitoring, compliance, and auditing must all be built and maintained internally, extending time-to-value and total cost of ownership\autocite{MotivityLabs2025}.
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{|p{0.24\textwidth}|p{0.33\textwidth}|p{0.34\textwidth}|}
+\hline
+\textbf{Solution Category} & \textbf{Strengths Observed} & \textbf{Gaps \& AgentiX Opportunity} \\ \hline
+Enterprise digital signature platforms (Adobe Acrobat Sign, DocuSign) & Legal-grade signatures, identity verification, intuitive UX, broad integrations\autocite{Oneflow2024,iLovePDF2024} & Static routing; no AI-driven document interpretation; limited automation beyond signing \\ \hline
+Collaboration suites (Lark, Google Workspace) & Real-time co-authoring, chat-driven approvals, templates and reminders\autocite{Lark2025,GoogleDocsApproval2024} & Lightweight automation; signature handled by add-ons; hard to enforce compliance-heavy flows \\ \hline
+Automation suites (Microsoft Power Automate) & Low-code builder, extensive connectors, event-driven workflows\autocite{MicrosoftPowerAutomate2024} & Manual rule design; optional AI; third-party signing; fragmented governance \\ \hline
+Integration-first BPM tools (n8n) & Custom multi-step flows, conditional logic, AI nodes for classification\autocite{n8nFeatures2024,n8n4452} & No native signing; document awareness must be engineered; security varies by deployment \\ \hline
+Open-source engineering stacks & Full customisation, no licence costs, composable components (NLP, workflow, crypto) & High build/maintenance burden; compliance and auditing remain in-house responsibilities\autocite{MotivityLabs2025} \\ \hline
+\end{tabular}
+\end{table}
+
+Market feedback from stakeholder interviews converged with secondary research, so we condensed the capability coverage into a comparative matrix (Table~\ref{tab:market-comparison}) to visualise differentiation across popular platforms.
+\begin{table}[h!]
+\centering
+\caption{Market capability comparison across leading approval platforms.}
+\label{tab:market-comparison}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.25}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|p{0.19\textwidth}|p{0.13\textwidth}|p{0.13\textwidth}|p{0.13\textwidth}|p{0.13\textwidth}|p{0.13\textwidth}|p{0.13\textwidth}|}
+\hline
+\textbf{Capability} & \textbf{AgentiX} & \textbf{Moxo} & \textbf{Lark} & \textbf{Power Automate} & \textbf{Google Workspace} & \textbf{n8n} \\ \hline
+Centralised approval hub & Native, agent-driven workspace & Client-facing collaboration suites\autocite{Rhyne2024} & Built-in Approval app\autocite{Lark2025} & Approval flows and staged routing\autocite{MicrosoftPowerAutomate2024} & Docs approval requests\autocite{GoogleDocsApproval2024} & Custom multi-step workflows\autocite{n8n8174} \\ \hline
+Agentic/AI workflow automation & LLM-informed routing with policy context & Human-in-the-loop automation & Configuration-driven, manual logic & Power Automate AI optional add-ons\autocite{MicrosoftPowerAutomate2024} & Limited Apps Script automation\autocite{GoogleDocsApproval2024} & AI nodes and agents for classification\autocite{Hostinger2024,n8n6628} \\ \hline
+Secure digital signatures & Bit-matching signatures plus credential validation & Legally binding e-signatures\autocite{Rhyne2024} & Integrated e-sign support & Third-party signature connectors\autocite{MicrosoftPowerAutomate2024} & Third-party signature integrations & Via integrations (DocuSign, etc.)\autocite{Vellum2024} \\ \hline
+End-to-end lifecycle tracking & Submission-to-archive governance with audit trails & Managed workspace history\autocite{Rhyne2024} & Versioning and status dashboards\autocite{Lark2025} & Flow run history and analytics\autocite{MicrosoftPowerAutomate2024} & Activity logs within Google Drive\autocite{GoogleDocsApproval2024} & Workflow diff and change history\autocite{n8nCompare2024} \\ \hline
+Notification and escalation & SLA-aware alerts, intelligent return loop & Client alerts and reminders\autocite{Rhyne2024} & Real-time chat notifications\autocite{Lark2025} & Adaptive notifications via connectors\autocite{n8n5049} & Email reminders & Messaging integrations, conditional reminders\autocite{n8n5049,n8n8174} \\ \hline
+Document intelligence & NLP classification, policy alignment & Metadata-driven filters & Manual rules or integrations & AI Builder add-ons\autocite{MicrosoftPowerAutomate2024} & Limited structured metadata & AI-enhanced extraction pipelines\autocite{n8n6628,Passionfruit2024} \\ \hline
+Governance flexibility & Cloud and private deployments, IAM alignment & Managed SaaS, vendor-controlled & SaaS within collaboration suite & Tenant-bound environments & Google Workspace tenant controls & Self-hosted or cloud deployment\autocite{Vellum2024,Softailed2024,Reddit2025} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+Key takeaways from the competitor analysis are:
+
+\begin{itemize}
+\item Enterprise leaders deliver trust and compliance, yet approvals remain static and sender-driven.
+\item Collaboration and automation suites accelerate communications but lack deep signature validation or AI-driven routing.
+\item Flexible BPM frameworks enable powerful integrations, although organisations must assemble security, data governance, and document intelligence on their own.
+\end{itemize}
+
+These gaps expose an opportunity for AgentiX to couple document understanding, adaptive routing, credential-aware signing, and lifecycle analytics in one governed platform.
+
+\newpage
+
+{\fontsize{20pt}{24pt}\selectfont\textbf{Section 3}\par}
+{\fontsize{18pt}{18pt}\selectfont\textbf{AgentiX: Our Solution to Address Market Pain Points}\par}
+
+The analysis of existing solutions reveals critical gaps in the document approval market: static routing logic, fragmented security models, limited AI integration, and complex multi-vendor dependencies. AgentiX is engineered to bridge these gaps through an integrated platform that transforms the fundamental approach to organizational approval workflows.
+
+\vspace{1em}
+
+\textbf{3.1 Core Solution Components}
+
+AgentiX addresses the identified weaknesses through four interconnected architectural pillars:
+
+\textbf{Web Application Layer}
+A unified interface replaces the disparate tools organizations currently juggle. Unlike collaboration suites that handle approvals as an afterthought, or BPM tools that require technical expertise, AgentiX provides purpose-built submission portals, approval dashboards, and administrative controls designed specifically for document lifecycle management.
+
+\textbf{Agentic AI Pipeline}
+Where existing platforms rely on manual routing rules, AgentiX deploys multi-agent reasoning systems that analyze document content, classify obligations, and dynamically map approval paths. This eliminates the static routing limitations of enterprise signature platforms and the manual configuration burden of automation suites.
+
+\textbf{Workflow Orchestration Engine}
+The stateful orchestration engine coordinates sequential and parallel approvals while maintaining full audit trails. Unlike n8n's custom engineering requirements or Power Automate's fragmented governance, AgentiX provides out-of-the-box approval orchestration with policy alignment and SLA monitoring.
+
+\textbf{Digital Signature Module with Bit-Matching}
+Integrated cryptographic signing with tamper detection addresses the security gaps in collaboration platforms and the third-party dependencies in automation tools. Hardware-backed key custody and hash verification ensure legal defensibility without external signature services.
+
+\vspace{2em}
+
+\textbf{3.2 AgentiX Capabilities Addressing Market Weaknesses}
+
+\begin{itemize}
+\item
+  \textbf{Agentic AI Workflow Orchestration}: Replaces the static routing of DocuSign and Adobe with multi-agent reasoning that classifies submissions, maps approvers, and sequences escalations without predetermined rules. This addresses the core limitation preventing existing platforms from handling complex, context-dependent approval scenarios.
+\item
+  \textbf{Document Understanding \& Routing Intelligence}: NLP pipelines normalize uploads and extract entities to enable content-aware routing from first submission. This eliminates the manual rule configuration required by Power Automate and the limited automation capabilities of collaboration suites.
+\item
+  \textbf{Intelligent Return Loop \& SLA Monitoring}: Routes rework directly to accountable owners and surfaces bottlenecks through dashboards, addressing the poor exception handling identified in existing approval systems. This prevents the endless email chains and lost documents that plague traditional workflows.
+\item
+  \textbf{Bit-Matching Digital Signature Module}: Hardware-backed keys with hash-based tamper detection provide cryptographic integrity without relying on third-party signature services. This addresses the security fragmentation and vendor dependencies that weaken current multi-tool approaches.
+\item
+  \textbf{Compliance-First Security Controls}: Role-based access, encryption, and immutable audit logs are built into the platform core, unlike the bolted-on security of open-source stacks or the tenant-dependent controls of collaboration suites.
+\item
+  \textbf{Flexible Deployment \& Integration Fabric}: Offers both managed cloud and private enterprise editions with pre-built connectors, addressing the deployment complexity of n8n and the vendor lock-in concerns of SaaS-only platforms.
+\end{itemize}
+
+\textbf{3.3 The AgentiX Value Proposition: Bridging the Gap}
+
+AgentiX is designed to address the gaps identified in these existing
+solutions. It integrates the core strengths of each category while
+mitigating their weaknesses. It goes beyond the static routing of
+enterprise digital signature platforms by incorporating a powerful
+\textbf{Agentic AI} to provide true intelligent, dynamic workflows that
+adapt to document content and context. Unlike "dumb" BPM tools,
+AgentiX\textquotesingle s AI analyzes the document itself to inform its
+routing decisions, making the workflow smarter and more autonomous from
+the moment of submission. Finally, AgentiX offers a complete, integrated
+solution that combines intelligent document analysis, workflow
+automation, and cryptographic security in a single, user-friendly
+platform, eliminating the need to build and maintain disparate systems
+from scratch.
+
+\vspace{1em}
+
+\textbf{3.4 Conclusion}
+
+While the existing market offers powerful tools for digital signatures
+and workflow automation, no single solution fully addresses the need for
+a system that is both highly secure and deeply intelligent.
+Enterprise-grade platforms provide the trust and compliance required for
+signatures but lack the dynamic, content-aware routing of AgentiX.
+Conversely, while BPM tools and open-source frameworks offer
+flexibility, they either require significant manual configuration or a
+high technical investment to achieve the desired level of intelligence.
+AgentiX\textquotesingle s proposed solution is a unique, hybrid model
+that marries the robust security and compliance of digital signature
+leaders with the intelligent, context-aware automation found in
+cutting-edge AI research. This combination creates a new class of
+product that is both powerful and practical for modern enterprise needs,
+delivering a level of efficiency and security that current solutions
+cannot match.
+
+\newpage
+
+{\fontsize{20pt}{24pt}\selectfont\textbf{Section 4}\par}
+{\fontsize{18pt}{18pt}\selectfont\textbf{AgentiX System Architecture}\par}
+
+\vspace{1em}
+
+This section presents the comprehensive technical architecture of AgentiX, detailing how the platform's components integrate to deliver secure, intelligent document approval workflows. The architecture follows microservices principles with security-first design patterns, ensuring scalability, maintainability, and regulatory compliance.
+
+\vspace{1em}
+
+\textbf{4.1 Architectural Overview}
+
+The AgentiX platform is structured as a distributed system comprising seven primary layers, each responsible for distinct functional domains. The architecture emphasizes defense-in-depth security, horizontal scalability, and operational observability. All inter-service communication is encrypted using mutual TLS (mTLS), while client-facing interfaces enforce TLS 1.3 for maximum transport security.
+
+The system supports dual deployment models: a managed cloud service with multi-tenant isolation and an enterprise-private offering that integrates directly with organizational infrastructure. Both models share the same core architecture, differing primarily in identity federation strategies and data residency configurations.
+
+\vspace{1em}
+
+\textbf{4.2 Layer-by-Layer Architecture}
+
+\subsubsection{4.2.1 Client Layer}
+
+The client layer provides three distinct user interfaces, each optimized for specific roles within the approval workflow:
+
+\begin{itemize}
+\item \textbf{Web Application (React Next.js):} The primary interface for document submission, approval queue management, and workflow monitoring. Built with React Next.js for server-side rendering and optimal performance, this application serves as the main entry point for document submitters and approvers. It implements responsive design patterns to ensure usability across desktop and tablet form factors.
+
+\item \textbf{Mobile Application:} A dedicated signer interface optimized for mobile devices, enabling executives and department heads to review and approve documents on-the-go. The mobile app implements biometric authentication and supports push notifications for time-sensitive approval requests.
+
+\item \textbf{Admin Console:} A specialized interface for Certificate Authority operations, policy configuration, and audit trail exploration. This console provides tools for managing user roles, configuring approval workflows, monitoring system health, and generating compliance reports.
+\end{itemize}
+
+All client applications communicate exclusively with the Edge and Security layer via HTTPS with TLS 1.3, ensuring end-to-end encryption of sensitive document data and user credentials.
+
+\vspace{1em}
+
+\subsubsection{4.2.2 Edge and Security Layer}
+
+This layer serves as the security perimeter for the entire platform, implementing multiple defense mechanisms before requests reach application services:
+
+\begin{itemize}
+\item \textbf{API Gateway (NGINX or Envoy):} Acts as the single entry point for all client requests, providing centralized routing, load balancing, and rate limiting. The gateway incorporates a Web Application Firewall (WAF) that filters malicious requests, prevents SQL injection and cross-site scripting attacks, and enforces request size limits to prevent denial-of-service attempts.
+
+\item \textbf{Identity Provider (OIDC/SAML):} Handles authentication and single sign-on integration. For cloud deployments, the platform supports standard OIDC (OpenID Connect) flows, while enterprise-private installations can integrate with existing SAML-based identity providers such as Active Directory Federation Services or Okta. This abstraction ensures seamless integration with organizational identity management systems while maintaining strong authentication standards.
+\end{itemize}
+
+After successful authentication, the API Gateway establishes mTLS connections with backend services, ensuring that internal communications are authenticated and encrypted even within the trusted network boundary.
+
+\newpage
+
+\begin{landscape}
+\thispagestyle{empty}
+\begin{figure}[p]
+\centering
+\includegraphics[width=\linewidth,height=\textheight,keepaspectratio]{System_Architecture.png}
+\caption{AgentiX Complete System Architecture Diagram}
+\label{fig:system-architecture}
+\end{figure}
+\end{landscape}
+
+\newpage
+
+\vspace{1em}
+
+\subsubsection{4.2.3 Application and Workflow Layer}
+
+The application layer orchestrates core business logic and workflow execution through three primary components:
+
+\begin{itemize}
+\item \textbf{Backend API (FastAPI or NestJS):} Implements RESTful and GraphQL endpoints for document operations, signature requests, verification queries, approval actions, and evidence retrieval. The API layer enforces authorization policies, validates input data, and coordinates interactions between the workflow engine and worker services. Built with FastAPI (Python) or NestJS (TypeScript) for high performance and strong typing guarantees.
+
+\item \textbf{Workflow Engine (Temporal or Zeebe):} Manages stateful, long-running approval workflows with guaranteed execution semantics. The workflow engine coordinates the multi-step approval process, handling sequential and parallel approval paths, timeout management, and compensating transactions for rollback scenarios. Temporal or Zeebe provide durable execution guarantees, ensuring that workflows survive service restarts and network partitions without data loss.
+
+\item \textbf{Public Verification Service:} Exposes a standalone endpoint for external parties to verify document signatures without requiring authentication. This service validates cryptographic signatures, checks certificate validity through OCSP (Online Certificate Status Protocol), and returns verification results with detailed attestation metadata.
+\end{itemize}
+
+\vspace{1em}
+
+\subsubsection{4.2.4 Workers Layer}
+
+The workers layer implements specialized microservices, each responsible for a discrete processing task within the document lifecycle. This architecture enables independent scaling, fault isolation, and technology-specific optimizations:
+
+\begin{itemize}
+\item \textbf{Intake Worker:} Receives uploaded documents and performs security validation: antivirus scanning, MIME type verification, and file format normalization. Documents passing validation are stored in object storage (MinIO/S3) with metadata persisted to PostgreSQL.
+
+\item \textbf{Parsing and OCR Worker:} Extracts textual content from documents using Apache Tika for general document parsing, pdfminer for PDF text extraction, and Tesseract OCR for scanned images. The extracted text feeds the Agentic AI pipeline for content analysis.
+
+\item \textbf{Policy Engine:} Enforces organizational policies including Role-Based Access Control (RBAC), four-eyes principle (requiring multiple independent approvals), and financial authorization limits. The policy engine validates that proposed approval paths comply with organizational governance rules before workflow initiation.
+
+\item \textbf{Signer Orchestrator:} Coordinates the cryptographic signing process. This worker computes document hashes, interacts with the HSM (Hardware Security Module) via PKCS\#11 interface to perform signing operations, and constructs CMS (Cryptographic Message Syntax) signatures compliant with PDF ByteRange specifications. This ensures that signatures cover the entire document content and are legally defensible.
+
+\item \textbf{TSA Worker:} Requests trusted timestamps from the Time Stamp Authority (TSA) following RFC 3161 standards. Timestamps bind the signature to a specific moment in time, providing evidence that the document was signed before any certificate expiration or revocation.
+
+\item \textbf{LTV Enrichment Worker:} Enhances signatures with Long-Term Validation (LTV) data by embedding OCSP responses and Certificate Revocation Lists (CRLs) into the document. This creates PAdES-LT (PDF Advanced Electronic Signatures - Long Term) or PAdES-LTA (Long Term Archival) compliant documents that remain verifiable even after the original certificates and validation infrastructure are no longer available.
+
+\item \textbf{Verification Worker:} Validates signed documents by verifying CMS signature structures, reconstructing and validating certificate chains, checking OCSP responses, and validating timestamp tokens. This worker implements the bit-matching logic that recomputes document hashes and compares them against signed hash values to detect any tampering.
+
+\item \textbf{Notification Worker:} Delivers approval notifications through multiple channels: webhooks for system integration, email for human recipients, and push notifications for mobile applications. The worker implements retry logic with exponential backoff and dead letter queuing for undeliverable messages.
+\end{itemize}
+
+\vspace{1em}
+
+\subsubsection{4.2.5 PKI and Cryptography Zone}
+
+The PKI layer provides the cryptographic foundation for all signature operations, implementing industry-standard certificate authority functionality with defense-in-depth security:
+
+\begin{itemize}
+\item \textbf{Root CA (Offline):} The trust anchor of the PKI hierarchy, stored offline in secure cold storage. The Root CA's private key is used only to sign Issuing CA certificates and is never exposed to network-connected systems, providing maximum protection against compromise.
+
+\item \textbf{Issuing CA (Online):} Issues end-entity certificates for document signers. The Issuing CA operates online but in a hardened environment, signing certificate requests after identity verification and policy validation.
+
+\item \textbf{OCSP Responder (RFC 6960):} Provides real-time certificate status information, responding to OCSP queries with signed responses indicating whether certificates are valid, revoked, or unknown. This service is critical for LTV validation workflows.
+
+\item \textbf{TSA Authority (RFC 3161):} Issues cryptographically signed timestamps that bind documents to specific points in time. The TSA maintains a secure time source and signs timestamp tokens with its own certificate, providing non-repudiable proof of document existence at the timestamp moment.
+
+\item \textbf{HSM or SoftHSM (PKCS\#11):} Stores cryptographic private keys in tamper-resistant hardware (HSM) or software emulation (SoftHSM for development). Keys never leave the HSM boundary; all signing operations occur within the module through PKCS\#11 interface calls.
+
+\item \textbf{OpenSSL Toolkit:} Provides low-level cryptographic operations including CMS signature generation/verification, OCSP request/response handling, timestamp request/verification, and CRL management. OpenSSL serves as the cryptographic engine underlying higher-level PKI services.
+
+\item \textbf{Vault PKI and KV:} HashiCorp Vault manages short-lived certificates for service-to-service mTLS authentication and stores sensitive configuration secrets. Vault's PKI engine automates certificate issuance and rotation, while the Key-Value store securely manages API keys, database credentials, and encryption keys.
+\end{itemize}
+
+\vspace{1em}
+
+\subsubsection{4.2.6 Data Plane}
+
+The data plane provides persistent storage for all platform data, optimized for different access patterns and durability requirements:
+
+\begin{itemize}
+\item \textbf{PostgreSQL:} The primary relational database stores user accounts, document metadata, workflow states, approval records, and audit logs. PostgreSQL's ACID guarantees ensure data consistency across concurrent transactions, while advanced features like row-level security and table partitioning support multi-tenant isolation and performance optimization.
+
+\item \textbf{MinIO or Amazon S3:} Object storage holds original documents, signed versions, signature evidence packages, and archived materials. Object storage provides virtually unlimited scalability, versioning capabilities to track document revisions, and lifecycle policies for automated archival and deletion according to retention requirements.
+
+\item \textbf{Apache Kafka:} Event streaming platform enables asynchronous communication between services. Workers publish events (document uploaded, signature completed, approval granted) to Kafka topics, allowing consumers to react without tight coupling. Kafka's Dead Letter Queue (DLQ) captures failed message processing for later investigation and reprocessing.
+
+\item \textbf{OpenSearch or PostgreSQL Full-Text Search:} Enables rapid document discovery through full-text search across document content, metadata, and annotations. Search indices are continuously updated as documents progress through the approval workflow, ensuring users can find relevant documents regardless of their current state.
+\end{itemize}
+
+\vspace{1em}
+
+\subsubsection{4.2.7 Observability and Operations Layer}
+
+The observability layer provides comprehensive visibility into system behavior, supporting proactive monitoring, incident response, and capacity planning:
+
+\begin{itemize}
+\item \textbf{OpenTelemetry Collector:} Ingests distributed traces, metrics, and logs from all application services and workers. OpenTelemetry's vendor-neutral instrumentation enables consistent observability across polyglot microservices, correlating requests as they flow through multiple components.
+
+\item \textbf{Prometheus and Grafana:} Prometheus scrapes time-series metrics from instrumented services, storing them in a highly efficient time-series database. Grafana visualizes these metrics through customizable dashboards, tracking key performance indicators like approval latency, signature success rates, and worker queue depths. Alert rules trigger notifications when metrics exceed defined thresholds.
+
+\item \textbf{Centralized Logs (Loki or ELK):} Aggregates log streams from all services into a searchable central repository. Loki (with Grafana) or the ELK stack (Elasticsearch, Logstash, Kibana) enable operators to search logs across services, correlate events during incident investigations, and establish audit trails for compliance reporting.
+
+\item \textbf{Backups and Retention:} Implements comprehensive data protection strategies including PostgreSQL point-in-time recovery (PITR), object storage versioning with immutable retention periods, and Write-Once-Read-Many (WORM) storage for tamper-proof archival. Automated backup testing ensures recovery procedures remain effective.
+\end{itemize}
+
+\vspace{1em}
+
+\textbf{4.3 Security Architecture}
+
+Security permeates every layer of the AgentiX architecture through multiple complementary mechanisms:
+
+\begin{itemize}
+\item \textbf{Transport Security:} TLS 1.3 encrypts all client-to-gateway communication with forward secrecy, while mTLS secures all service-to-service communication within the trusted network boundary. Certificate rotation is automated through Vault's PKI engine.
+
+\item \textbf{Authentication and Authorization:} The Identity Provider centralizes authentication with support for multi-factor authentication (MFA), while the Backend API enforces fine-grained authorization using attribute-based access control (ABAC) policies that consider user roles, document sensitivity, and approval context.
+
+\item \textbf{Cryptographic Integrity:} The Signer Orchestrator computes SHA-256 or SHA-3 hashes of document content before signing, while the Verification Worker recomputes hashes to detect tampering. HSM-backed signing ensures private keys never exist in plaintext outside secure hardware boundaries.
+
+\item \textbf{Audit and Compliance:} Every document access, approval action, and signature operation generates immutable audit log entries in PostgreSQL with cryptographic chaining to prevent retroactive modification. These logs support regulatory compliance reporting and forensic investigations.
+
+\item \textbf{Defense in Depth:} Multiple security layers ensure that compromise of any single component does not expose the entire system. The API Gateway filters malicious requests, the Policy Engine validates business rules, and the PKI zone isolates cryptographic operations in hardened enclaves.
+\end{itemize}
+
+\vspace{1em}
+
+\textbf{4.4 Scalability and Resilience}
+
+The microservices architecture enables independent scaling of components based on load characteristics:
+
+\begin{itemize}
+\item \textbf{Horizontal Scaling:} Stateless workers and API services can be replicated horizontally behind load balancers, distributing request processing across multiple instances. Kafka enables workers to process messages in parallel, automatically load-balancing across consumer instances.
+
+\item \textbf{Workflow Durability:} Temporal/Zeebe workflow engines persist workflow state to PostgreSQL, ensuring that long-running approval processes survive service restarts, deployments, and infrastructure failures without data loss or duplicate processing.
+
+\item \textbf{Fault Isolation:} Circuit breakers prevent cascading failures when downstream services become unavailable. Workers implement exponential backoff retry logic, while Kafka's DLQ captures messages that fail processing after configured retry attempts.
+
+\item \textbf{Data Durability:} PostgreSQL streaming replication maintains standby replicas for high availability, while object storage replicates documents across multiple availability zones. Regular backup testing validates that disaster recovery procedures meet defined Recovery Point Objective (RPO) and Recovery Time Objective (RTO) targets.
+\end{itemize}
+
+\vspace{1em}
+
+\textbf{4.5 Deployment Models}
+
+AgentiX supports two deployment configurations to accommodate diverse organizational requirements:
+
+\begin{itemize}
+\item \textbf{Managed Cloud Service:} A multi-tenant SaaS offering hosted on public cloud infrastructure (AWS, Azure, or GCP). Tenant isolation is enforced at the database schema level and through resource namespacing in Kubernetes. Each tenant receives a dedicated admin console for self-service configuration of approval workflows, user roles, and integration settings. The cloud service provides automated provisioning, managed upgrades, and 24/7 operational support.
+
+\item \textbf{Enterprise-Private Deployment:} A single-tenant installation within the customer's private network, deployed using containerized services (Docker/Kubernetes) and infrastructure-as-code templates (Terraform/Helm). This model enables direct integration with on-premise databases, HR systems, and identity providers through VPN or private network connectivity. Customers maintain full control over data residency, network policies, and compliance configurations.
+\end{itemize}
+
+Both deployment models share the same core architecture, with configuration differences limited to identity federation (OIDC vs. SAML), network topology (public vs. private), and operational responsibilities (managed vs. self-hosted).
+
+\vspace{1em}
+
+\textbf{4.6 Integration Architecture}
+
+AgentiX provides multiple integration mechanisms to embed within existing enterprise ecosystems:
+
+\begin{itemize}
+\item \textbf{RESTful and GraphQL APIs:} The Backend API exposes comprehensive programmatic interfaces for document submission, approval automation, signature verification, and audit trail retrieval. API clients authenticate using OAuth 2.0 bearer tokens or API keys with configurable scopes.
+
+\item \textbf{Webhook Notifications:} The Notification Worker delivers real-time event notifications to external systems via configurable webhooks, enabling workflow integration with CRM systems, document management platforms, and business intelligence tools.
+
+\item \textbf{Identity Federation:} Support for OIDC, SAML, and LDAP protocols enables seamless integration with enterprise identity providers including Azure AD, Okta, Auth0, and on-premise Active Directory installations.
+
+\item \textbf{SCIM Provisioning:} The System for Cross-domain Identity Management (SCIM) protocol automates user and group synchronization between enterprise HR systems and AgentiX, ensuring that organizational changes automatically propagate to approval workflows.
+\end{itemize}
+
+\vspace{1em}
+
+\textbf{4.7 Technology Stack Summary}
+
+The following table summarizes key technology choices across architectural layers:
+
+\begin{table}[h!]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{0.30\textwidth}|p{0.65\textwidth}|}
+\hline
+\textbf{Component} & \textbf{Technology Options} \\ \hline
+Frontend Applications & React Next.js, React Native, TypeScript \\ \hline
+API Gateway & NGINX, Envoy Proxy \\ \hline
+Backend API & FastAPI (Python), NestJS (TypeScript) \\ \hline
+Workflow Engine & Temporal, Zeebe \\ \hline
+Message Broker & Apache Kafka \\ \hline
+Relational Database & PostgreSQL with TimescaleDB extension \\ \hline
+Object Storage & MinIO (self-hosted), Amazon S3 \\ \hline
+Search Engine & OpenSearch, PostgreSQL Full-Text Search \\ \hline
+PKI and Cryptography & OpenSSL, SoftHSM, Hardware HSM (Thales, Utimaco) \\ \hline
+Secrets Management & HashiCorp Vault \\ \hline
+Observability & OpenTelemetry, Prometheus, Grafana, Loki, ELK \\ \hline
+Container Orchestration & Kubernetes, Docker Compose \\ \hline
+Infrastructure as Code & Terraform, Helm Charts \\ \hline
+\end{tabular}
+\caption{AgentiX technology stack across architectural layers}
+\label{tab:tech-stack}
+\end{table}
+
+\vspace{1em}
+
+\textbf{4.8 Architectural Principles}
+
+The AgentiX architecture adheres to the following design principles:
+
+\begin{itemize}
+\item \textbf{Security by Design:} Security considerations inform every architectural decision, from transport encryption and authentication to data encryption at rest and cryptographic signature validation.
+
+\item \textbf{Separation of Concerns:} Each microservice encapsulates a single responsibility, enabling independent development, testing, deployment, and scaling without impacting other components.
+
+\item \textbf{API-First Design:} All functionality is exposed through well-defined APIs with comprehensive documentation, enabling programmatic integration and supporting multiple client applications.
+
+\item \textbf{Event-Driven Architecture:} Asynchronous event streaming through Kafka decouples services, enabling independent scaling and fault isolation while maintaining eventual consistency.
+
+\item \textbf{Operational Excellence:} Comprehensive observability, automated deployment pipelines, and infrastructure-as-code practices ensure reliable operations at scale.
+
+\item \textbf{Standards Compliance:} Adherence to established standards (RFC 3161 for timestamps, RFC 6960 for OCSP, PAdES for PDF signatures) ensures interoperability and legal defensibility.
+\end{itemize}
+
+\vspace{1em}
+
+This architecture provides a robust foundation for implementing AgentiX's intelligent document approval capabilities while ensuring security, scalability, and operational reliability required for enterprise deployments.
+
+\newpage
+
+\printbibliography
+
+\end{document}
